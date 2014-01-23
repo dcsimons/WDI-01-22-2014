@@ -1,0 +1,22 @@
+<%= render  partial: "navbar" %>
+
+<h1>Rails Movie App</h1>
+
+<form accept-charset="UTF-8" action="/movies/searchresults" method="post">
+		<label for="movie"></label>
+		<input id="movie" name="movie" type="text" placeholder="Movie search" />
+		<button type="submit" class="btn btn-sm btn-primary">Search</button>
+</form><br>
+
+<% @movies.each do |movie| %>
+
+  <%= link_to movie["title"], movie_path(movie['imdbID']) %> - <%= movie["year"] %></br>
+
+  <%= button_to "delete", movie_path(movie["imdbID"]), :method => :delete %>
+  <%= button_to "edit", edit_movie_path(movie["imdbID"]), :method => :get %>
+
+  <br>
+
+<% end %>
+<br>
+<%= link_to 'Add Movie to DB', new_movie_path %>
